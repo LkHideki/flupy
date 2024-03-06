@@ -34,6 +34,12 @@ class FrenchDeck:
         _s += '\n'
         return _s
 
+    def __bool__(self) -> bool:
+        """ Answers the question 'is this deck original'?
+        """
+        if len(self) == len(self._cards): return True
+        return False
+
     def shuffle(self):
         """
         Shuffles the cards in the deck.
