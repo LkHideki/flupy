@@ -23,6 +23,17 @@ class FrenchDeck:
     def __getitem__(self, position: int) -> Card:
         return self.cards[position]
 
+    def __repr__(self) -> str:
+        _s = ""
+        acc = 0
+        for c in self.cards:
+            if acc % 5 == 0: _s += '\n'
+            else: _s += '\t'
+            _s += c.rank + c.suit[0]
+            acc+=1
+        _s += '\n'
+        return _s
+
     def shuffle(self):
         """
         Shuffles the cards in the deck.
@@ -46,7 +57,6 @@ class FrenchDeck:
         for _ in range(number_of_cards):
             extractions.append(self.cards.pop())
         return extractions
-
 
 if __name__ == "__main__":
     deck = FrenchDeck()
