@@ -1,6 +1,6 @@
 """ Memoryview
 
-memoryview(•) é uma função nativa que permite manipular fatias de iteraveis
+memoryview() é uma classe nativa que permite manipular fatias de iteraveis
 sem criar cópias.
 """
 
