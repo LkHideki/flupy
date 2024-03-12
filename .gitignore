@@ -1,3 +1,4 @@
 .venv
 .DS_Store
+**/__pycache__/
 05_fluxo/17_concorrencia_futures/downloads/*.gif
