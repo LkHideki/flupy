@@ -38,3 +38,11 @@ for blabla in range(100): ...
 print("O valor de blabla é", blabla)
 # Ou seja, a variável blabla é global.
 del blabla
+
+
+''' Limitações de referências fracas
+
+Instâncias de list e dict não podem ser referentes.
+
+Uma subclasse de qualquer uma delas pode.
+'''
