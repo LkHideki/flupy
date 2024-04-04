@@ -23,9 +23,18 @@ for q in catalogo:
     estoque[q.tipo] = q
 
 del catalogo
+# del q
 
 for q in estoque.keys():
     print(q)
 
 # Por que tem um queijo no estoque??
 # R: porque a variável `q` é global.
+
+
+# O que ocorreu acima, é o mesmo que
+for blabla in range(100): ...
+
+print("O valor de blabla é", blabla)
+# Ou seja, a variável blabla é global.
+del blabla
