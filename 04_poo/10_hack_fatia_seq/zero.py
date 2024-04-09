@@ -2,6 +2,7 @@
 '''
 
 from array import array
+import numbers
 import reprlib
 import math
 
@@ -79,7 +80,13 @@ class Tomada2:
             return len(self._components)
 
         def __getitem__(self, i: int):
-            return self._components[i]
+            cls = type(self)
+            if isinstance(i, slice):
+                return cls(self._components[i])
+            elif isinstance(i, numbers.Integral):
+                return self._components[i]
+            msg = f'{cls.__name__}: os índices devem ser números inteiros.'
+            raise TypeError(msg)
 
         @classmethod
         def frombytes(cls, octets):
