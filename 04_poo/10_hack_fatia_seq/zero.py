@@ -148,6 +148,19 @@ class Tomada3:
             msg = f"{cls.__name__} não tem atributo {attr}"
             raise AttributeError(msg)
 
+        def __setattr__(self, name, value) -> None:
+            cls = type(self)
+            if len(name) == 1:
+                error = ''
+                if name in cls.shortcuts:
+                    error = f'O atributo {name} é readonly.'
+                elif name.islower():
+                    error = f'Não é possível setar atributos de a a z em {cls.__name__}'
+
+                if error:
+                    raise AttributeError(error)
+            super().__setattr__(name, value)
+
         @classmethod
         def frombytes(cls, octets):
             typecode = chr(octets[0])
