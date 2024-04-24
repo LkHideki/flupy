@@ -4,7 +4,7 @@ RE_WORD = re.compile(r'\w+')
 
 class Sentence:
     def __init__(self, text: str) -> None:
-        self.text = text.strip()
+        self.text: str = text.strip()
         self.words = RE_WORD.findall(self.text)
     
     def __getitem__(self, index: int) -> str:
