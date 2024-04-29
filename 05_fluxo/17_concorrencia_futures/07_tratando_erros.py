@@ -4,7 +4,7 @@
 import os
 import pathlib
 import requests
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
 from tqdm import tqdm
 
 
@@ -46,7 +46,9 @@ def salve_muitas(gil: bool = True):
         todo[f] = b
 
     # Recebendo os downloads
-    for future in tqdm(todo, total=len(BANDEIRAS), desc="Bandeiras", unit=" bandeira"):
+    for future in tqdm(
+        as_completed(todo), total=len(BANDEIRAS), desc="Bandeiras", unit=" bandeira"
+    ):
         try:
             future.result()
         except:
