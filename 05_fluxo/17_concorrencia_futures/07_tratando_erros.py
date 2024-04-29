@@ -1,4 +1,6 @@
 """ Tratamento de erros no download de bandeiras
+
+A função futures.as_completed devolve um iterador que produz futures à medida que terminam
 """
 
 import os
