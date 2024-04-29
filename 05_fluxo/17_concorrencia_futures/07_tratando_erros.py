@@ -4,7 +4,7 @@
 import os
 import pathlib
 import requests
-from concurrent import futures
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from tqdm import tqdm
 
 
@@ -33,10 +33,11 @@ def salve_uma_bandeira(pais: str) -> None:
         print("Erro na conexão. Bandeira:", pais.upper())
 
 
-def salve_muitas():
+def salve_muitas(gil: bool = True):
     workers = min(MAX_WORKERS, len(BANDEIRAS))
-    executor = futures.ProcessPoolExecutor(workers)
-    # executor = futures.ThreadPoolExecutor(workers)
+    executor: ThreadPoolExecutor | ProcessPoolExecutor = ThreadPoolExecutor(workers)
+    if not gil:
+        executor = ProcessPoolExecutor()
 
     # Agendando downloads
     todo = {}
