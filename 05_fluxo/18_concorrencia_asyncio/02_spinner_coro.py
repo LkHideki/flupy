@@ -16,6 +16,8 @@ async def spin(msg):
     for char in itertools.cycle("|/-\\"):
         status = char + " " + msg + next(ellipsis)
         print(status, flush=True, end="\r")
+        # o \r acima faz o cursor voltar para o começo da linha
+
         try:
             await asyncio.sleep(0.1)
         except asyncio.CancelledError:
@@ -25,6 +27,8 @@ async def spin(msg):
 
 async def slow_function():
     await asyncio.sleep(3)
+    # Não usou o time.sleep para não bloquear a thread principal
+
     return 42
 
 
