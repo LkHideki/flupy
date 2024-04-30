@@ -15,7 +15,10 @@ def spin(msg, signal):
         status = char + " " + msg + next(ellipsis)
         write(status)
         flush()
+
+        # o caractere \x08 de backspace move o cursor para trás
         write("\x08" * len(status))
+
         time.sleep(0.1)
         if not signal.go:
             break
