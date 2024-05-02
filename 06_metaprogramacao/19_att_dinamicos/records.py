@@ -1,7 +1,7 @@
 """ Este módulo tem as definições de Record
 """
 
-from re import L
+import inspect
 import json, shelve
 
 
@@ -74,8 +74,16 @@ def load_db(db: shelve.Shelf):
     with open("./osconfeed.json", "r") as data:
         j = json.load(data)
         for collection, rec_list in j["Schedule"].items():
-            record_type = collection[:-1]
+            record_type: str = collection[:-1]
+            cls_name = record_type.capitalize()
+            cls = globals().get(cls_name, DbRecord)
+
+            if inspect.isclass(cls) and issubclass(cls, DbRecord):
+                factory = cls
+            else:
+                factory = DbRecord
+
             for record in rec_list:
                 key = f'{record_type}.{record["serial"]}'
                 record["serial"] = key
-                db[key] = Record(**record)
+                db[key] = factory(**record)
